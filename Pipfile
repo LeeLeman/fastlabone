@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+pydantic = "*"
+uvicorn = "*"
+typing-extensions = "*"
+pytest = "*"
+jinja2 = "*"
+numpy = "1.24.2"
+Pillow = "*"
+python-multipart = "*"
+matplotlib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.12"
