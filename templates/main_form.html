@@ -8,12 +8,19 @@
 </head>
 <body>
     <h1>Загрузите изображение для обработки</h1>
+
+    {% if error %}
+        <div style="color: red;">
+            {{ error }}
+        </div>
+    {% endif %}
+
     <form action="/process_image/" enctype="multipart/form-data" method="post">
         <label for="file">Изображение:</label>
-        <input name="file" type="file">
+        <input name="file" type="file" required>
         <br>
         <label for="stripe_width">Ширина полосы:</label>
-        <input type="number" name="stripe_width" value="10">
+        <input type="number" name="stripe_width" value="10" required>
         <br>
         <label for="direction">Направление полос:</label>
         <select name="direction">

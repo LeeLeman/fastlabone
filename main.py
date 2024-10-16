@@ -39,8 +39,20 @@ async def process_image(
     result = response.json()
 
     # Проверка результата
-    if not result.get("success"):
-        return templates.TemplateResponse("display_images.html", {"request": request, "error": "Проверка капчи не пройдена."})
+    captcha_check = g_recaptcha_response and result.get("success")
+    if not captcha_check:
+        return templates.TemplateResponse("main_form.html", {
+            "request": request,
+            "site_key": settings.SITE_KEY,
+            "error": "Проверка капчи не пройдена. Пожалуйста, попробуйте ещё раз"
+        })
+
+    if not file.size:
+        return templates.TemplateResponse("main_form.html", {
+            "request": request,
+            "site_key": settings.SITE_KEY,
+            "error": "Не выбрано изображение. Пожалуйста, попробуйте еще раз"
+        })
 
     # Открываем исходное изображение
     image = Image.open(file.file)
