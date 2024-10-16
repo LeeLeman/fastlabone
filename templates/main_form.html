@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обработка изображения</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <h1>Загрузите изображение для обработки</h1>
@@ -20,7 +21,11 @@
             <option value="horizontal">Горизонтальные</option>
         </select>
         <br><br>
+
+        <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
+        <br>
         <input type="submit" value="Отправить">
+
     </form>
 </body>
 </html>
