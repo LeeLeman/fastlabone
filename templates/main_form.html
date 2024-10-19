@@ -5,34 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обработка изображения</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 <body>
-    <h1>Загрузите изображение для обработки</h1>
+    <div class="content">
+        <h1>Загрузите изображение для обработки</h1>
 
-    {% if error %}
-        <div style="color: red;">
-            {{ error }}
-        </div>
-    {% endif %}
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
 
-    <form action="/process_image/" enctype="multipart/form-data" method="post">
-        <label for="file">Изображение:</label>
-        <input name="file" type="file" required>
-        <br>
-        <label for="stripe_width">Ширина полосы:</label>
-        <input type="number" name="stripe_width" value="10" required>
-        <br>
-        <label for="direction">Направление полос:</label>
-        <select name="direction">
-            <option value="vertical">Вертикальные</option>
-            <option value="horizontal">Горизонтальные</option>
-        </select>
-        <br><br>
+        <form action="/process_image/" enctype="multipart/form-data" method="post">
+            <label for="file">Изображение:</label>
+            <input name="file" type="file" required>
+            <br>
 
-        <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
-        <br>
-        <input type="submit" value="Отправить">
+            <label for="stripe_width">Ширина полосы:</label>
+            <input type="number" name="stripe_width" value="10" required>
+            <br>
 
-    </form>
+            <label for="direction">Направление полос:</label>
+            <select name="direction">
+                <option value="vertical">Вертикальные</option>
+                <option value="horizontal">Горизонтальные</option>
+            </select>
+            <br><br>
+
+            <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
+            <br>
+
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, UploadFile, File, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 from PIL import Image
 import httpx
@@ -10,6 +11,7 @@ import settings
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Эндпоинт для главной страницы
 @app.get("/", response_class=HTMLResponse)

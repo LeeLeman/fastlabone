@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Результаты обработки изображения</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 <body>
-    <h1>Исходное и обработанное изображение</h1>
+    <div class="content">
+        <h1>Исходное и обработанное изображение</h1>
 
-    <h2>Исходное изображение:</h2>
-    <img src="data:image/png;base64,{{ original_image }}" alt="Original Image">
+        <h2>Исходное изображение:</h2>
+        <img src="data:image/png;base64,{{ original_image }}" alt="Original Image">
 
-    <h2>Обработанное изображение:</h2>
-    <img src="data:image/png;base64,{{ processed_image }}" alt="Processed Image">
+        <h2>Обработанное изображение:</h2>
+        <img src="data:image/png;base64,{{ processed_image }}" alt="Processed Image">
 
-    <h2>Гистограмма распределения цветов:</h2>
-    <img src="data:image/png;base64,{{ original_color_distribution }}" alt="Original Color Distribution">
+        <h2>Гистограмма распределения цветов:</h2>
+        <img src="data:image/png;base64,{{ original_color_distribution }}" alt="Original Color Distribution">
+
+        <br><br>
+        <a href="/" class="button">Обработать другое изображение</a>
+    </div>
 </body>
 </html>
