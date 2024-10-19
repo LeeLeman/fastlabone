@@ -27,7 +27,6 @@ async def process_image(
         direction: str = Form(...),
         g_recaptcha_response: str = Form(alias="g-recaptcha-response")
 ):
-    # Проверяем reCAPTCHA на стороне сервера
     async with httpx.AsyncClient() as client:
         response = await client.post(
             'https://www.google.com/recaptcha/api/siteverify',
@@ -38,7 +37,6 @@ async def process_image(
         )
     result = response.json()
 
-    # Проверка результата
     captcha_check = g_recaptcha_response and result.get("success")
     if not captcha_check:
         return templates.TemplateResponse("main_form.html", {
@@ -54,20 +52,13 @@ async def process_image(
             "error": "Не выбрано изображение. Пожалуйста, попробуйте еще раз"
         })
 
-    # Открываем исходное изображение
     image = Image.open(file.file)
 
-    # Обрабатываем изображение (меняем полосы местами)
     processed_image = swap_stripes(image, stripe_width, direction)
-
-    # Конвертируем изображения в base64
     original_image_base64 = image_to_base64(image)
     processed_image_base64 = image_to_base64(processed_image)
-
-    # Строим графики распределения цветов для исходного и измененного изображений
     original_color_distribution = plot_color_distribution(image)
 
-    # Рендерим шаблон с изображениями и графиками
     return templates.TemplateResponse("display_images.html", {
         "request": request,
         "message": "Капча пройдена! Изображение обработано.",

@@ -16,6 +16,7 @@ python-multipart = "*"
 matplotlib = "*"
 httpx = "*"
 python-dotenv = "*"
+pytest-mock = "*"
 
 [dev-packages]
 
