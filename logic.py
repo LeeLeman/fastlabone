@@ -1,9 +1,9 @@
 import base64
-
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 import io
+
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
 
 
 # Функция для обмена полос изображения
@@ -13,9 +13,10 @@ def swap_stripes(image: Image, stripe_width: int, direction: str) -> Image:
     stripes = []
     new_image = np.zeros_like(np_image)
 
+    # Делим изображение на полосы по вертикали
     if direction == "vertical":
         for i in range(0, width, stripe_width):
-            stripe = np_image[:, i:i + stripe_width]
+            stripe = np_image[:, i : i + stripe_width]
             stripes.append(stripe)
 
         for i in range(0, len(stripes) - 1, 2):
@@ -26,7 +27,7 @@ def swap_stripes(image: Image, stripe_width: int, direction: str) -> Image:
     # Делим изображение на полосы по горизонтали
     elif direction == "horizontal":
         for i in range(0, height, stripe_width):
-            stripe = np_image[i:i + stripe_width, :]
+            stripe = np_image[i : i + stripe_width, :]
             stripes.append(stripe)
 
         for i in range(0, len(stripes) - 1, 2):
@@ -45,19 +46,19 @@ def plot_color_distribution(image: Image) -> str:
 
     # Создаем гистограммы для каждого канала с логарифмической шкалой по оси Y
     plt.figure(figsize=(10, 6))
-    plt.hist(r.ravel(), bins=256, color='red', alpha=0.5, label='Красный канал')
-    plt.hist(g.ravel(), bins=256, color='green', alpha=0.5, label='Зелёный канал')
-    plt.hist(b.ravel(), bins=256, color='blue', alpha=0.5, label='Синий канал')
+    plt.hist(r.ravel(), bins=256, color="red", alpha=0.5, label="Красный канал")
+    plt.hist(g.ravel(), bins=256, color="green", alpha=0.5, label="Зелёный канал")
+    plt.hist(b.ravel(), bins=256, color="blue", alpha=0.5, label="Синий канал")
 
     # Настраиваем график
-    plt.xlabel('Интенсивность цвета')
-    plt.ylabel('Частота (логарифмическая)')
-    plt.legend(loc='upper right')
-    plt.title('Распределение цветов по каналам (RGB)')
-    plt.yscale('log')
+    plt.xlabel("Интенсивность цвета")
+    plt.ylabel("Частота (логарифмическая)")
+    plt.legend(loc="upper right")
+    plt.title("Распределение цветов по каналам (RGB)")
+    plt.yscale("log")
 
     buffer = io.BytesIO()
-    plt.savefig(buffer, format='png')
+    plt.savefig(buffer, format="png")
     buffer.seek(0)
     plt.close()
 

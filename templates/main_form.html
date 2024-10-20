@@ -10,32 +10,26 @@
 <body>
     <div class="content">
         <h1>Загрузите изображение для обработки</h1>
-
         {% if error %}
             <div class="error">
                 {{ error }}
             </div>
         {% endif %}
-
         <form action="/process_image/" enctype="multipart/form-data" method="post">
-            <label for="file">Изображение:</label>
+            <label>Изображение:</label>
             <input name="file" type="file" required>
             <br>
-
-            <label for="stripe_width">Ширина полосы:</label>
+            <label>Ширина полосы:</label>
             <input type="number" name="stripe_width" value="10" required>
             <br>
-
-            <label for="direction">Направление полос:</label>
+            <label>Направление полос:</label>
             <select name="direction">
                 <option value="vertical">Вертикальные</option>
                 <option value="horizontal">Горизонтальные</option>
             </select>
             <br><br>
-
             <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
             <br>
-
             <input type="submit" value="Отправить">
         </form>
     </div>
